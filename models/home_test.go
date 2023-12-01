@@ -7,6 +7,7 @@ import (
 
 func TestHome_Map(t *testing.T) {
 	home := &Home{
+		ID:            "1",
 		EmployeeID:    "123",
 		ResidencyRoom: "Room A",
 		Dinner:        "Home-cooked",
@@ -18,6 +19,7 @@ func TestHome_Map(t *testing.T) {
 	homeMap := home.Map()
 
 	expectedMap := map[string]interface{}{
+		"id":             "1",
 		"employee_id":    "123",
 		"residency_room": "Room A",
 		"dinner":         "Home-cooked",
@@ -37,6 +39,7 @@ func TestHome_Names(t *testing.T) {
 	fieldNames := home.Names()
 
 	expectedNames := []string{
+		"id",
 		"employee_id",
 		"residency_room",
 		"dinner",

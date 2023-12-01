@@ -3,6 +3,7 @@ package models
 import "github.com/fatih/structs"
 
 type Home struct {
+	ID            string `json:"id" structs:"id"`
 	EmployeeID    string `json:"employee_id" structs:"employee_id"`
 	ResidencyRoom string `json:"residency_room" structs:"residency_room"`
 	Dinner        string `json:"dinner" structs:"dinner"`
