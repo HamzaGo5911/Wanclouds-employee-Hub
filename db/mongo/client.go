@@ -164,7 +164,7 @@ func (c *client) GetOfficeByID(id string) (*models.Office, error) {
 func (c client) DeleteOffice(id string) error {
 	collection := c.conn.Database(viper.GetString(config.DbName)).Collection(officeCollection)
 	if _, err := collection.DeleteOne(context.TODO(), bson.M{"_id": id}); err != nil {
-		return errors.Wrap(err, "failed to delete home")
+		return errors.Wrap(err, "failed to delete office")
 	}
 
 	return nil
@@ -264,4 +264,13 @@ func (c client) ListHome() ([]*models.Home, error) {
 	}
 
 	return home, nil
+}
+
+// Disconnect - closes the db connections
+func (c *client) Disconnect(ctx context.Context) error {
+	if err := c.conn.Disconnect(ctx); err != nil {
+		return errors.Wrap(err, "failed to disconnect mongo client")
+	}
+
+	return nil
 }

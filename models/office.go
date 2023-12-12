@@ -3,13 +3,13 @@ package models
 import "github.com/fatih/structs"
 
 type Office struct {
-	ID          string `json:"id" structs:"id"`
-	EmployeeID  string `json:"employee_id" structs:"employee_id"`
-	OfficeRoom  string `json:"office_room" structs:"office_room"`
-	MeetingRoom string `json:"meeting_room" structs:"meeting_room"`
-	LunchArea   string `json:"lunch_area" structs:"lunch_area"`
-	TeaArea     string `json:"tea_area" structs:"tea_area"`
-	PlayingArea string `json:"playing_area" structs:"playing_area"`
+	ID          string `json:"id" structs:"id" bson:"_id"`
+	Name        string `json:"name" structs:"name" bson:"name"`
+	Room        string `json:"room" structs:"room" bson:"room"`
+	MeetingRoom string `json:"meeting_room" structs:"meeting_room" bson:"meeting_room"`
+	LunchArea   string `json:"lunch_area" structs:"lunch_area" bson:"lunch_area"`
+	TeaArea     string `json:"tea_area" structs:"tea_area" bson:"tea_area"`
+	PlayingArea string `json:"playing_area" structs:"playing_area" bson:"playing_area"`
 }
 
 // Map converts structs to a map representation

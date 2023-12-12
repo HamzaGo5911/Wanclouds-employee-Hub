@@ -7,9 +7,9 @@ import (
 
 func TestOffice_Map(t *testing.T) {
 	office := &Office{
-		ID:          "456",
-		EmployeeID:  "789",
-		OfficeRoom:  "Room 405",
+		ID:          "1",
+		Name:        "wanclouds",
+		Room:        "Room 405",
 		MeetingRoom: "Room 206",
 		LunchArea:   "gallery",
 		TeaArea:     "Kitchen",
@@ -19,9 +19,9 @@ func TestOffice_Map(t *testing.T) {
 	officeMap := office.Map()
 
 	expectedMap := map[string]interface{}{
-		"id":           "456",
-		"employee_id":  "789",
-		"office_room":  "Room 405",
+		"id":           "1",
+		"name":         "wanclouds",
+		"room":         "Room 405",
 		"meeting_room": "Room 206",
 		"lunch_area":   "gallery",
 		"tea_area":     "Kitchen",
@@ -40,8 +40,8 @@ func TestOffice_Names(t *testing.T) {
 
 	expectedNames := []string{
 		"id",
-		"employee_id",
-		"office_room",
+		"name",
+		"room",
 		"meeting_room",
 		"lunch_area",
 		"tea_area",

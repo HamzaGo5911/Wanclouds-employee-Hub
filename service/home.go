@@ -7,17 +7,21 @@ import (
 
 // AddHome adds home into the database
 func (s *Service) AddHome(home *models.Home) (string, error) {
-	existingHome, err := s.db.GetHomeByID(home.ID)
+	existingHomes, err := s.db.ListHome()
 	if err != nil {
 		return "", err
 	}
 
-	Homes, err := s.db.AddHome(existingHome)
+	if len(existingHomes) >= 2 {
+		return "", domainerr.NewAPIError(domainerr.Conflict, "home already exists")
+	}
+
+	addedHomeID, err := s.db.AddHome(home)
 	if err != nil {
 		return "", err
 	}
 
-	return Homes, nil
+	return addedHomeID, nil
 }
 
 // GetHomeByID retrieves a home by its ID

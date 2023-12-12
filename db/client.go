@@ -1,6 +1,7 @@
 package db
 
 import (
+	"context"
 	"log"
 
 	"github.com/HamzaGo5911/wanclouds-employee-hub/models"
@@ -20,6 +21,7 @@ type DataStore interface {
 	GetHomeByID(id string) (*models.Home, error)
 	DeleteHome(id string) error
 	ListHome() ([]*models.Home, error)
+	Disconnect(ctx context.Context) error
 }
 
 // Option holds configuration for data store clients

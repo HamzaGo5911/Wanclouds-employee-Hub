@@ -7,16 +7,18 @@ import (
 )
 
 type Employee struct {
-	ID           string    `json:"id" structs:"id"`
-	Name         string    `json:"name" structs:"name"`
-	Email        string    `json:"email" structs:"email"`
-	Phone        string    `json:"phone" structs:"phone"`
-	Team         string    `json:"team" structs:"team"`
-	JobTitle     string    `json:"job_title" structs:"job_title"`
-	StartDate    time.Time `json:"start_date" structs:"start_date"`
-	Salary       float64   `json:"salary" structs:"salary"`
-	Benefits     []string  `json:"benefits" structs:"benefits"`
-	IsOutstation bool      `json:"is_outstation" structs:"is_outstation"`
+	ID         string    `json:"id" structs:"id" bson:"_id" db:"id"`
+	OfficeID   string    `json:"office_id" structs:"office_id" bson:"office_id"`
+	HomeID     string    `json:"home_id" structs:"home_id" bson:"home_id"`
+	Name       string    `json:"name" structs:"name" bson:"name" db:"name"`
+	Email      string    `json:"email" structs:"email" bson:"email" db:"email"`
+	Title      string    `json:"title" structs:"title" bson:"title" db:"title"`
+	Phone      string    `json:"phone" structs:"phone" bson:"phone" db:"phone"`
+	Team       string    `json:"team" structs:"team" bson:"team" db:"team"`
+	StartDate  time.Time `json:"start_date" structs:"start_date" bson:"start_date" db:"start_date"`
+	Salary     float64   `json:"salary" structs:"salary" bson:"salary" db:"salary"`
+	Benefits   []string  `json:"benefits" structs:"benefits" bson:"benefits" db:"benefits"`
+	Outstation bool      `json:"outstation" structs:"outstation" bson:"outstation" db:"outstation"`
 }
 
 // Map converts structs to a map representation

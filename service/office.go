@@ -5,14 +5,18 @@ import (
 	"github.com/HamzaGo5911/wanclouds-employee-hub/models"
 )
 
-// AddOffice adds office into the database
+// AddOffice adds an office into the database if no office exists
 func (s *Service) AddOffice(office *models.Office) (string, error) {
-	existingOffice, err := s.db.GetOfficeByID(office.ID)
+	existingOffice, err := s.db.ListOffice()
 	if err != nil {
 		return "", err
 	}
 
-	offices, err := s.db.AddOffice(existingOffice)
+	if len(existingOffice) > 0 {
+		return "", domainerr.NewAPIError(domainerr.Conflict, "office already exists ")
+	}
+
+	offices, err := s.db.AddOffice(office)
 	if err != nil {
 		return "", err
 	}
@@ -51,7 +55,7 @@ func (s *Service) ListOffice() ([]*models.Office, error) {
 
 // UpdateOffice updates an existing office with the provided information.
 func (s *Service) UpdateOffice(office *models.Office) (string, error) {
-	officeID, err := s.db.GetEmployeeByID(office.ID)
+	officeID, err := s.db.GetOfficeByID(office.ID)
 	if err != nil {
 		return "", err
 	}

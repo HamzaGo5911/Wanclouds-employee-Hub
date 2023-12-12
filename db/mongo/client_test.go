@@ -25,15 +25,18 @@ func Test_client_AddEmployee(t *testing.T) {
 		{
 			name: "success - add employee in db",
 			args: args{employee: &models.Employee{
-				ID:        "123",
-				Name:      "hamza",
-				Email:     "hamza@wanlouds.net",
-				Phone:     "12345567",
-				Team:      "Golang",
-				JobTitle:  "Software Engineer",
-				StartDate: time.Now(),
-				Salary:    75000.00,
-				Benefits:  []string{"Health Insurance", "Paid Time Off"},
+				ID:         "123",
+				OfficeID:   "1",
+				HomeID:     "2",
+				Name:       "engineer hamza",
+				Email:      "engrhamza@gmail.com",
+				Phone:      "123-456-7890",
+				Team:       "Backend Golang",
+				Title:      "Software Engineer",
+				StartDate:  time.Now(),
+				Salary:     20000.0,
+				Benefits:   []string{"Health Insurance", "Paid Time Off"},
+				Outstation: true,
 			}},
 			wantErr: false,
 		},
@@ -44,7 +47,7 @@ func Test_client_AddEmployee(t *testing.T) {
 			m, _ := NewClient(db.Option{})
 			_, err := m.AddEmployee(tt.args.employee)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("AddCloudProvider() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("AddEmployee() error = %v, wantErr %v", err, tt.wantErr)
 			}
 
 		})
@@ -58,15 +61,18 @@ func Test_client_GetEmployeeByID(t *testing.T) {
 	c, _ := NewClient(db.Option{})
 
 	employee := &models.Employee{
-		ID:        "123",
-		Name:      "hamza",
-		Email:     "hamza@wanlouds.net",
-		Phone:     "12345567",
-		Team:      "Golang",
-		JobTitle:  "Software Engineer",
-		StartDate: time.Date(2023, 12, 1, 0, 0, 0, 0, time.UTC),
-		Salary:    75000.00,
-		Benefits:  []string{"Health Insurance", "Paid Time Off"},
+		ID:         "123",
+		OfficeID:   "1",
+		HomeID:     "2",
+		Name:       "engineer hamza",
+		Email:      "engrhamza@gmail.com",
+		Phone:      "123-456-7890",
+		Team:       "Backend Golang",
+		Title:      "Software Engineer",
+		StartDate:  time.Date(2023, 12, 1, 0, 0, 0, 0, time.UTC),
+		Salary:     20000.0,
+		Benefits:   []string{"Health Insurance", "Paid Time Off"},
+		Outstation: true,
 	}
 
 	_, _err := c.AddEmployee(employee)
@@ -111,15 +117,18 @@ func Test_client_DeleteEmployee(t *testing.T) {
 
 	c, _ := NewClient(db.Option{})
 	employee := &models.Employee{
-		ID:        "123",
-		Name:      "hamza",
-		Email:     "hamza@wanlouds.net",
-		Phone:     "12345567",
-		Team:      "Golang",
-		JobTitle:  "Software Engineer",
-		StartDate: time.Date(2023, 12, 1, 0, 0, 0, 0, time.UTC),
-		Salary:    75000.00,
-		Benefits:  []string{"Health Insurance", "Paid Time Off"},
+		ID:         "12",
+		OfficeID:   "4",
+		HomeID:     "2",
+		Name:       "engineer hamza",
+		Email:      "engrhamza@gmail.com",
+		Phone:      "123-456-7890",
+		Team:       "Backend Golang",
+		Title:      "Software Engineer",
+		StartDate:  time.Now(),
+		Salary:     20000.0,
+		Benefits:   []string{"Health Insurance", "Paid Time Off"},
+		Outstation: true,
 	}
 
 	_, _ = c.AddEmployee(employee)
@@ -188,9 +197,9 @@ func Test_client_AddOffice(t *testing.T) {
 		{
 			name: "success - add office in db",
 			args: args{office: &models.Office{
-				ID:          "456",
-				EmployeeID:  "789",
-				OfficeRoom:  "Room 405",
+				ID:          "1",
+				Name:        "Wanclouds",
+				Room:        "Room 405",
 				MeetingRoom: "Room 206",
 				LunchArea:   "gallery",
 				TeaArea:     "Kitchen",
@@ -219,9 +228,9 @@ func Test_client_OfficeByID(t *testing.T) {
 	c, _ := NewClient(db.Option{})
 
 	office := &models.Office{
-		ID:          "456",
-		EmployeeID:  "789",
-		OfficeRoom:  "Room 405",
+		ID:          "1",
+		Name:        "Wanclouds",
+		Room:        "Room 405",
 		MeetingRoom: "Room 206",
 		LunchArea:   "gallery",
 		TeaArea:     "Kitchen",
@@ -271,8 +280,8 @@ func Test_client_DeleteOffice(t *testing.T) {
 	c, _ := NewClient(db.Option{})
 	office := &models.Office{
 		ID:          "456",
-		EmployeeID:  "789",
-		OfficeRoom:  "Room 405",
+		Name:        "Wanclouds",
+		Room:        "Room 405",
 		MeetingRoom: "Room 206",
 		LunchArea:   "gallery",
 		TeaArea:     "Kitchen",
@@ -345,13 +354,13 @@ func Test_client_AddHome(t *testing.T) {
 		{
 			name: "success - add home in db",
 			args: args{home: &models.Home{
-				ID:            "1",
-				EmployeeID:    "123",
+				ID:            "2",
 				ResidencyRoom: "Room A",
 				Dinner:        "Home-cooked",
 				DinnerRoom:    "Kitchen",
 				DiningRoom:    "Dining Hall",
 				CommonRoom:    "Living Room",
+				Tea:           "karak chai",
 			}},
 			wantErr: false,
 		},
@@ -376,13 +385,13 @@ func Test_client_GetHomeByID(t *testing.T) {
 	c, _ := NewClient(db.Option{})
 
 	home := &models.Home{
-		ID:            "1",
-		EmployeeID:    "123",
+		ID:            "2",
 		ResidencyRoom: "Room A",
 		Dinner:        "Home-cooked",
 		DinnerRoom:    "Kitchen",
 		DiningRoom:    "Dining Hall",
 		CommonRoom:    "Living Room",
+		Tea:           "karak chai",
 	}
 
 	_, _err := c.AddHome(home)
@@ -427,13 +436,13 @@ func Test_client_DeleteHome(t *testing.T) {
 
 	c, _ := NewClient(db.Option{})
 	home := &models.Home{
-		ID:            "1",
-		EmployeeID:    "123",
+		ID:            "14",
 		ResidencyRoom: "Room A",
 		Dinner:        "Home-cooked",
 		DinnerRoom:    "Kitchen",
 		DiningRoom:    "Dining Hall",
 		CommonRoom:    "Living Room",
+		Tea:           "karak chai",
 	}
 
 	_, _ = c.AddHome(home)
