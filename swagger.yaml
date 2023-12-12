@@ -1,0 +1,361 @@
+swagger: "2.0"
+info:
+  description: "Employee Hub API"
+  version: "1.0.0"
+  title: "Wanclouds Employee Hub"
+host: "localhost:8080"
+basePath: "/v1/wanemployeehub"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /employee:
+    post:
+      operationId: "addEmployee"
+      parameters:
+        - in: "body"
+          name: "employee"
+          description: "Employee's details"
+          required: true
+          schema:
+            $ref: "#/definitions/Employee"
+      responses:
+        201:
+          description: "Employee added"
+          schema:
+            $ref: "#/definitions/Employee"
+        409:
+          description: "employee already exists"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+    get:
+      operationId: "listEmployees"
+      description: "Return a list of employees"
+      responses:
+        200:
+          description: "List of employees"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Employee"
+        404:
+          description: "Employee not found"
+        204:
+          description: "No employee record found"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+  /employee/{ID}:
+    get:
+      operationId: "getEmployee"
+      parameters:
+        - in: "path"
+          name: "ID"
+          type: "string"
+          required: true
+          description: "ID of the employee"
+      responses:
+        200:
+          description: "Employee details"
+          schema:
+            $ref: "#/definitions/Employee"
+        404:
+          description: "Employee not found"
+        500:
+          description: "Internal server error"
+    patch:
+      operationId: "updateEmployee"
+      parameters:
+        - in: "path"
+          name: "ID"
+          type: "string"
+          required: true
+          description: "ID of the employee"
+        - in: "body"
+          name: "employee"
+          schema:
+            $ref: "#/definitions/Employee"
+      responses:
+        200:
+          description: "Employee updated"
+          schema:
+            $ref: "#/definitions/Employee"
+        500:
+          description: "Internal server error"
+        404:
+          description: "Employee not found"
+    delete:
+      operationId: "deleteEmployee"
+      parameters:
+        - in: "path"
+          name: "ID"
+          type: "string"
+          required: true
+          description: "ID of the employee"
+      responses:
+        204:
+          description: "Employee deleted"
+        404:
+          description: "Employee not found"
+        500:
+          description: "Internal server error"
+  /office:
+    post:
+      operationId: "addOffice"
+      parameters:
+        - in: "body"
+          name: "office"
+          description: "Office's details"
+          required: true
+          schema:
+            $ref: "#/definitions/Office"
+      responses:
+        201:
+          description: "Office added"
+          schema:
+            $ref: "#/definitions/Office"
+        400:
+          description: "Bad request"
+        409:
+          description: "office already exists"
+        500:
+          description: "Internal server error"
+    get:
+      operationId: "listOffices"
+      description: "Return a list of offices"
+      responses:
+        200:
+          description: "List of offices"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Office"
+        404:
+          description: "Offices not found"
+        204:
+          description: "No office record found"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+  /office/{ID}:
+    get:
+      operationId: "getOffice"
+      parameters:
+        - in: "path"
+          type: "string"
+          name: "ID"
+          required: true
+          description: "UUID of the office"
+      description: "Return office based on UUID"
+      responses:
+        200:
+          description: "Office response"
+          schema:
+            $ref: "#/definitions/Office"
+        404:
+          description: "Office not found"
+        500:
+          description: "Internal server error"
+    patch:
+      operationId: "updateOffice"
+      parameters:
+        - in: "path"
+          type: "string"
+          name: "ID"
+          required: true
+          description: "UUID of the office"
+        - in: body
+          name: "office"
+          schema:
+            $ref: "#/definitions/Office"
+      responses:
+        200:
+          description: "Office updated"
+          schema:
+            $ref: "#/definitions/Office"
+        500:
+          description: "Internal server error"
+        404:
+          description: "Office not found"
+    delete:
+      operationId: "deleteOffice"
+      parameters:
+        - in: "path"
+          name: "ID"
+          type: "string"
+          description: "UUID of the office"
+          required: true
+      responses:
+        204:
+          description: "Office deleted"
+        404:
+          description: "Office not found"
+        500:
+          description: "Internal server error"
+  /home:
+    post:
+      operationId: "addHome"
+      parameters:
+        - in: "body"
+          name: "home"
+          description: "Home's details"
+          required: true
+          schema:
+            $ref: "#/definitions/Home"
+      responses:
+        201:
+          description: "Home added"
+          schema:
+            $ref: "#/definitions/Home"
+        400:
+          description: "Bad request"
+        409:
+          description: "Home already exists"
+        500:
+          description: "Internal server error"
+    get:
+      operationId: "listHomes"
+      description: "Return a list of homes"
+      responses:
+        200:
+          description: "List of homes"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Home"
+        404:
+          description: "Homes not found"
+        204:
+          description: "No home record found"
+        400:
+          description: "Bad request"
+        500:
+          description: "Internal server error"
+  /home/{ID}:
+      get:
+        operationId: "getHome"
+        parameters:
+          - in: "path"
+            type: "string"
+            name: "ID"
+            required: true
+            description: "ID of the home"
+        description: "Return home based on ID"
+        responses:
+          200:
+            description: "Home response"
+            schema:
+              $ref: "#/definitions/Home"
+          404:
+            description: "Home not found"
+          500:
+            description: "Internal server error"
+      patch:
+        operationId: "updateHome"
+        parameters:
+          - in: "path"
+            type: "string"
+            name: "ID"
+            required: true
+            description: "ID of the home"
+          - in: body
+            name: "home"
+            schema:
+              $ref: "#/definitions/Home"
+        responses:
+          200:
+            description: "Home updated"
+            schema:
+              $ref: "#/definitions/Home"
+          500:
+            description: "Internal server error"
+          404:
+            description: "Home not found"
+      delete:
+        operationId: "deleteHome"
+        parameters:
+          - in: "path"
+            name: "ID"
+            type: "string"
+            description: "ID of the home"
+            required: true
+        responses:
+          204:
+            description: "Home deleted"
+          404:
+            description: "Home not found"
+          500:
+            description: "Internal server error"
+definitions:
+  Employee:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      office_id:
+        type: "string"
+      home_id:
+        type: "string"
+      name:
+        type: "string"
+      email:
+        type: "string"
+      phone:
+        type: "string"
+      team:
+        type: "string"
+      title:
+        type: "string"
+      start_date:
+        type: "string"
+        format: "date-time"
+      salary:
+        type: "number"
+        format: "float"
+      benefits:
+        type: "array"
+        items:
+          type: "string"
+      outstation:
+        type: "boolean"
+  Office:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      room:
+        type: "string"
+      meeting_room:
+        type: "string"
+      lunch_area:
+        type: "string"
+      tea_area:
+        type: "string"
+      playing_area:
+        type: "string"
+  Home:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      tea:
+        type: "string"
+      residency_room:
+        type: "string"
+      dinner:
+        type: "string"
+      dinner_room:
+        type: "string"
+      dining_room:
+        type: "string"
+      common_room:
+        type: "string"
